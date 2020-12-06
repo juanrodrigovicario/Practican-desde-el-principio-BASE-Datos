@@ -22,7 +22,7 @@ app.get('/phones', function (req, res) {
 app.get('/phone/:phone', function (req, res) {
   res.json(phones[req.params.phone]);
 });
-app.post('/phone', function (req, res) {
+app.post('/phones', function (req, res) {
   var newPhone = {
     id: id++,
     brand: req.body.brand,
@@ -34,7 +34,7 @@ app.post('/phone', function (req, res) {
 //     phones = phones.map()
 // })
 
-app.get('/phone/price/:price', function (req, res) {
+app.get('/phones/price/:price', function (req, res) {
   var menorPrice = phones.filter(function (phone) {
     return phone.price < req.params.price;
   });

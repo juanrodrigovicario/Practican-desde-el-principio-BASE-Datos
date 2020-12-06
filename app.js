@@ -27,7 +27,7 @@ app.get('/phone/:phone', (req,res) => {
     res.json(phones[req.params.phone])
 })
 
-app.post('/phone', (req,res) => {
+app.post('/phones', (req,res) => {
     const newPhone = {
         id:id++,
         brand: req.body.brand,
@@ -41,7 +41,7 @@ app.post('/phone', (req,res) => {
 //     phones = phones.map()
 // })
 
-app.get('/phone/price/:price', (req,res) => {
+app.get('/phones/price/:price', (req,res) => {
     const menorPrice = phones.filter( phone => phone.price < req.params.price)
     res.status(200).send(menorPrice)
 })
