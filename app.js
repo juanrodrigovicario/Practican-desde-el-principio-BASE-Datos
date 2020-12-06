@@ -23,8 +23,9 @@ app.get('/phones', (req,res) => {
     res.json(phones)
 })
 
-app.get('/phone/:phone', (req,res) => {
-    res.json(phones[req.params.phone])
+app.get('/phones/:id', (req,res) => {
+    const phone = phones.find(phone => phone.id === +req.params.id)
+    res.json(phone)
 })
 
 app.post('/phones', (req,res) => {
@@ -37,17 +38,32 @@ app.post('/phones', (req,res) => {
     res.json(newPhone)
 })
 
-// app.put('/:id', (req,res) => {
-//     phones = phones.map()
+app.put('/phones/:id', (req,res) => {
+    const newPhone = {
+        id: +req.params.id,
+        brand: req.body.brand,
+        price:req.body.price
+    }
+    
+    phones = phones.map(phone => phone.id === +req.params.id? newPhone : phone)
+    console.log('put')
+    res.status(204).end()
+})
+
+// app.get('/phones/price/:price', (req,res) => {
+//     const menorPrice = phones.filter( phone => phone.price < +req.params.price)
+//     res.json(menorPrice)
 // })
 
-app.get('/phones/price/:price', (req,res) => {
-    const menorPrice = phones.filter( phone => phone.price < req.params.price)
-    res.status(200).send(menorPrice)
+app.get('/phones/price', (req,res) => {
+    const maxPrice = +req.query.price
+    let menorPrice = maxPrice? phones.filter( phone => phone.price < maxPrice) : phones
+    res.json(menorPrice)
 })
 
 app.delete('/phones/:id', (req,res) => {
     console.log(req.params.id);
-    phones = phones.filter(phone => phone.id !== req.params.id)
-    res.json(phones)
+    phones = phones.filter(phone => phone.id !== +req.params.id)
+    res.status(201).json(phones)
 })
+
