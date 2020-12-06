@@ -19,15 +19,15 @@ let phones = [
     }
 ]
 
-app.get('/', (req,res) => {
+app.get('/phones', (req,res) => {
     res.json(phones)
 })
 
-app.get('/:phone', (req,res) => {
+app.get('/phone/:phone', (req,res) => {
     res.json(phones[req.params.phone])
 })
 
-app.post('/', (req,res) => {
+app.post('/phone', (req,res) => {
     const newPhone = {
         id:id++,
         brand: req.body.brand,
@@ -41,12 +41,12 @@ app.post('/', (req,res) => {
 //     phones = phones.map()
 // })
 
-app.get('/price/:price', (req,res) => {
+app.get('/phone/price/:price', (req,res) => {
     const menorPrice = phones.filter( phone => phone.price < req.params.price)
     res.status(200).send(menorPrice)
 })
 
-app.delete('/phone/:id', (req,res) => {
+app.delete('/phones/:id', (req,res) => {
     console.log(req.params.id);
     phones = phones.filter(phone => phone.id !== req.params.id)
     res.json(phones)

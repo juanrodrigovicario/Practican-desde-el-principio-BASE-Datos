@@ -16,13 +16,13 @@ var phones = [{
   brand: 'samsung',
   price: 700
 }];
-app.get('/', function (req, res) {
+app.get('/phones', function (req, res) {
   res.json(phones);
 });
-app.get('/:phone', function (req, res) {
+app.get('/phone/:phone', function (req, res) {
   res.json(phones[req.params.phone]);
 });
-app.post('/', function (req, res) {
+app.post('/phone', function (req, res) {
   var newPhone = {
     id: id++,
     brand: req.body.brand,
@@ -34,13 +34,13 @@ app.post('/', function (req, res) {
 //     phones = phones.map()
 // })
 
-app.get('/price/:price', function (req, res) {
+app.get('/phone/price/:price', function (req, res) {
   var menorPrice = phones.filter(function (phone) {
     return phone.price < req.params.price;
   });
   res.status(200).send(menorPrice);
 });
-app["delete"]('/phone/:id', function (req, res) {
+app["delete"]('/phones/:id', function (req, res) {
   console.log(req.params.id);
   phones = phones.filter(function (phone) {
     return phone.id !== req.params.id;
